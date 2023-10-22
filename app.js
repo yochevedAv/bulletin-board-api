@@ -1,16 +1,11 @@
-const express = require('express');
+// var express = require('express');
 
-const app = express ();
-app.use(express.json());
+// const app = express ();
 
-app.listen(PORT, () => {
-  console.log("Server Listening on PORT:", port);
-});
-
-app.get("/status", (request, response) => {
-    const status = {
-       "Status": "Running"
-    };
+// app.get("/status", (request, response) => {
+//     const status = {
+//        "Status": "Running"
+//     };
     
-    response.send(status);
- });
+//     response.send(status);
+//  });d
