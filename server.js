@@ -3,7 +3,6 @@ const express = require("express")
 const app = express()
 const PORT = 5000
 
-// app.listen(PORT, () => console.log(`Server Connected to port ${PORT}`))
 app.use(express.json())
 app.use("/api/auth", require("./Auth/route"))
 const connectDB = require("./db");
