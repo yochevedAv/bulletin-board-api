@@ -4,7 +4,8 @@ const app = express()
 const PORT = 5000
 
 app.use(express.json())
-app.use("/api/auth", require("./Auth/route"))
+app.use("/api/auth", require("./myRoute"))
+app.use("/api/models", require("./myRoute"))
 const connectDB = require("./db");
 
 //Connecting the Database

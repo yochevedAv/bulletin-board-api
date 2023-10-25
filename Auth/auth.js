@@ -4,7 +4,6 @@ var validator = require("email-validator");
 
 
 
-
 exports.register = async (req, res, next) => {
     const { username, password, email } = req.body
     if (password.length < 6) {
@@ -12,6 +11,9 @@ exports.register = async (req, res, next) => {
     }
     if(!validator.validate(email)){
       return res.status(400).json({ message: "email is not correct" })
+    }
+    if(await User.findOne({ email })){
+      return res.status(400).json({ message: "email is exsit" })
     }
     try {
       bcrypt.hash(password, 10).then(async (hash) => {
@@ -43,7 +45,7 @@ exports.register = async (req, res, next) => {
 
 
   exports.login = async (req, res, next) => {
-    const { username, password, email } = req.body
+    const {password, email } = req.body
     // Check if username and password is provided
     if (!email || !password) {
       return res.status(400).json({
@@ -61,11 +63,11 @@ exports.register = async (req, res, next) => {
           error: "User not found",
         })
       } else {
+        user._id = user.id
         // comparing given password with hashed password
         bcrypt.compare(password, user.password).then(function (result) {
           result
             ? res.status(200).json({
-                message: "Login successful",
                 user,
               })
             : res.status(400).json({ message: "Login not succesful" })
@@ -77,4 +79,8 @@ exports.register = async (req, res, next) => {
         error: error.message,
       })
     }
-  }
+  } 
+
+  
+
+ 
