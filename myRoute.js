@@ -6,7 +6,7 @@ router.route("/register").post(register)
 router.route("/login").post(login);
 router.route("/createPost").post(createPost);
 router.route("/getPosts").get(getPosts);
-router.route("/deletePost").get(deletePost);
+router.route("/deletePost/:postId").delete(deletePost);
 
 //router.route("/createpost").post(createpost)
 module.exports = router

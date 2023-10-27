@@ -10,7 +10,6 @@ exports.createPost = async (req, res, next) => {
       });
     }
 
-
     // Create a new post
     const newPost = await Post.create({
       userId,
@@ -45,22 +44,19 @@ exports.getPosts = async (req, res, next) => {
   }
 };
 
+
+
 exports.deletePost = async (req, res, next) => {
   try {
-    const postId = req.body.postId;
+    const postId = req.params.postId; // Get postId from URL parameters
     const deletedPost = await Post.findByIdAndRemove(postId);
 
     if (!deletedPost) {
-      return res.status(404).json({ error: 'Post not found' });
+      return res.status(404).json({ success: false, message: 'Post not found or couldn\'t be deleted' });
     }
-    res.status(200).json({
-      message: "Post successfully deleted",
-      deletedPost,
-    })
-    
+    res.status(200).json({ success: true, message: 'Post deleted successfully' });
   } catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ success: false, message: 'An error occurred while deleting the post' });
   }
-};
-
+}
 
