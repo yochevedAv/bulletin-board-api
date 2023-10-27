@@ -60,3 +60,22 @@ exports.deletePost = async (req, res, next) => {
   }
 }
 
+// Update a post by its ID
+exports.updatePost = async  (req, res, next) => {
+  try {
+    const postId = req.body._id;
+    const updates = req.body; // The updated data for the post
+
+    // Find and update the post by its ID
+    const updatedPost = await Post.findByIdAndUpdate(postId, updates, { new: true });
+
+    if (!updatedPost) {
+      return res.status(404).json({ success: false, message: 'Post not found or couldn\'t be updated' });
+    }
+
+    res.status(200).json({ success: true, message: 'Post updated successfully', updatedPost });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'An error occurred while updating the post' });
+  }
+};
+
