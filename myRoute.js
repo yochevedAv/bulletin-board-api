@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const { register, login } = require("./Auth/auth")
-const { createPost, getPosts, deletePost, updatePost } = require("./models")
+const { createPost, getPosts, deletePost, updatePost } = require("./Posts/posts")
 router.route("/register").post(register)
 router.route("/login").post(login);
 router.route("/createPost").post(createPost);

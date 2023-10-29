@@ -5,7 +5,7 @@ const PORT = 5000
 
 app.use(express.json())
 app.use("/api/auth", require("./myRoute"))
-app.use("/api/models", require("./myRoute"))
+app.use("/api/posts", require("./myRoute"))
 const connectDB = require("./db");
 
 //Connecting the Database
